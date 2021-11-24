@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+{% block content %}
+<div class="mt-1">
+    <center>
+        <div class="w-50">
+            <form method="POST" action="/create-task">
+                <input type="hidden" name="id" value="{{id}}">
+                <label for="situation">Informe os dados da tarefa</label>
+                </br>
+                </br>
+                <label>Nome:</label> <input class="form-control" type="text" name="name" required>
+                </br>
+                <label>Descrição:</label> <input class="form-control" type="text" name="description" required>
+                </br>
+                <label>Situação:</label>
+                <select name="situation" class="form-select" aria-label="Default select example">
+                    <option value="Aberta">Aberta</option>
+                    <option value="Pendente">Pendente</option>
+                    <option value="Realizada">Realizada</option>
+                    <option value="Atrasada">Atrasada</option>
+                  </select>
+                </br>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a class='btn btn-danger' href="{{url_for('index')}}">Voltar</a>
+            </form>
+        </div>
+    </center>
+</div>
+{% endblock %}

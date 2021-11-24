@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block content %}
+    <div class="mt-1">
+        <center>
+            <div class="w-50">
+                <form method="POST" action="/auth">
+                    <p><label>E-mail:</label> <input class="form-control" type="text" name="email" required></p>
+                    <p><label>Senha:</label> <input class="form-control" type="password" name="password" required></p>
+                    <p><button class="btn btn-primary w-100" type="submit">Entrar</button></p>
+                </form>
+            </div>
+        </center>
+    </div>
+{% endblock %}

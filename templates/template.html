@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tarefas</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+        }
+        .appbar {
+            display: flex;
+            background-color: #34495E;
+            margin-bottom: 10vh;
+        }
+        .iconAppBar {
+            margin: 1vh;
+            display: flex;
+            align-items: center;
+            font-family: 'Bungee', cursive;
+            font-size: 3vh;
+        }
+        .iconAppBar img{
+            margin-left: 2vw;
+        }
+        .iconAppBar span{
+            margin-left: 1vw;
+        }
+        .optionsAppBar {
+            margin-right: 4vh;
+        }
+        .optionsAppBar a{
+            margin-right: .5vh;
+            margin-left: .5vh;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark appbar">
+        <a class="navbar-brand" href="{{url_for('index')}}">
+            <div class ="iconAppBar"><img src="/static/icons/schedule-icon.svg"><span>Minha Agenda</span></div>
+        </a>
+        {% if session['user'] != None %}
+            <div class="optionsAppBar">
+                <a class='btn btn-light' href="{{url_for('create_task_render')}}">Adicionar Tarefa</a>
+                <a class='btn btn-danger' href="{{url_for('logout')}}">Sair</a>
+            </div>
+        {% else %}
+        <div class="optionsAppBar">
+            <a class='btn btn-light' href="{{url_for('create_user_render')}}">Cadastrar-se</a>
+        </div>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+      <div class="page-header">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul id="messages" class="list-unstyled">
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                        <li class="alert alert-danger">{{ message }}</li>
+                        {% elif category == 'message' %}
+                        <li class="alert alert-success">{{ message }}</li>
+                        {% elif category == 'warning' %}
+                        <li class="alert alert-warning">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class='display-1 text-center' style='font-size: xx-large;'>{{ title }}</h1>
+      </div>
+      {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
